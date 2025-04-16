@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const { email, university, company, type, t } = req.query;
 
-  const scriptUrl = "https://script.google.com/macros/s/AKfycbwmec_CUPJBsO-Pg_EaOBphtgLpdHXbmagh6uW7OzSWwJxW4gdsQqZI7jyMJpp-1Olhwg/exec";
+  const scriptUrl = "https://script.google.com/macros/s/AKfycbwH9hPm58y9LiUL7OEVI_5B_smjSHe5XDl9XusjRm7yJDszT3Lw22eiZcLZTB9Fr6A8/exec";
 
   try {
     await fetch(scriptUrl, {
