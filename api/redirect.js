@@ -1,12 +1,12 @@
 export default async function handler(req, res) {
-  const { email, university, company, type } = req.query;
+  const { email, university, company, type, sentAt } = req.query;
   const linkRaw = req.query.link || "";
-  const link = decodeURIComponent(decodeURIComponent(linkRaw)); // ✅ 이중 디코딩
+  const link = decodeURIComponent(decodeURIComponent(linkRaw));
 
-  const scriptUrl = "https://script.google.com/macros/s/AKfycbxNz0MB0cbgklFfxZYG3ipJbmySM0APhlZNbma_ka7uGlPeaI7L5TZyh-v__ev090yD/exec";
+  const scriptUrl = "https://script.google.com/macros/s/AKfycby1fj0xpjCs1hJFlSNRszWtIVU0OShik-UxXspJ6mMziD_OZkRlZlmU0m-tYBpmZz0M/exec";
 
-  console.log("🖱️ [REDIRECT] 요청 수신됨");
-  console.log("받은 쿼리값:", { email, university, company, type, link });
+  console.log("🔗 [REDIRECT] 요청 수신됨");
+  console.log("받은 쿼리값:", { email, university, company, type, link, sentAt });
 
   if (!scriptUrl || !link) {
     console.warn("⚠️ 잘못된 요청: scriptUrl 또는 link 누락");
@@ -21,9 +21,10 @@ export default async function handler(req, res) {
       company,
       link,
       time: new Date().toISOString(),
+      sentAt,
     };
 
-    console.log("🔗 Google Apps Script로 POST 요청 전송:", payload);
+    console.log("📤 Google Apps Script로 POST 요청 전송 ➡️", payload);
 
     await fetch(scriptUrl, {
       method: "POST",
@@ -32,7 +33,6 @@ export default async function handler(req, res) {
     });
 
     console.log("✅ Google Apps Script POST 완료");
-    console.log("🔁 사용자 리디렉션:", link);
 
     res.writeHead(302, { Location: link });
     res.end();
