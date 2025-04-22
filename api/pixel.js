@@ -1,10 +1,10 @@
 export default async function handler(req, res) {
-  const { email, university, company, type, t } = req.query;
+  const { email, university, company, type, t, sentAt } = req.query;
 
-  const scriptUrl = "https://script.google.com/macros/s/AKfycbxNz0MB0cbgklFfxZYG3ipJbmySM0APhlZNbma_ka7uGlPeaI7L5TZyh-v__ev090yD/exec";
+  const scriptUrl = "https://script.google.com/macros/s/AKfycby1fj0xpjCs1hJFlSNRszWtIVU0OShik-UxXspJ6mMziD_OZkRlZlmU0m-tYBpmZz0M/exec";
 
   console.log("📩 [PIXEL] 요청 수신됨");
-  console.log("받은 쿼리값:", { email, university, company, type, t });
+  console.log("받은 쿼리값:", { email, university, company, type, t, sentAt });
 
   try {
     const payload = {
@@ -13,9 +13,10 @@ export default async function handler(req, res) {
       university,
       company,
       time: t,
+      sentAt,
     };
 
-    console.log("🔗 Google Apps Script로 POST 요청 전송:", payload);
+    console.log("📤 Google Apps Script로 POST 요청 전송 ➡️", payload);
 
     await fetch(scriptUrl, {
       method: "POST",
