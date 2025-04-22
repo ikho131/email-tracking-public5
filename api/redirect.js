@@ -3,7 +3,7 @@ export default async function handler(req, res) {
   const linkRaw = req.query.link || "";
   const link = decodeURIComponent(decodeURIComponent(linkRaw)); // ✅ 이중 디코딩
 
-  const scriptUrl = "https://script.google.com/macros/s/AKfycbxIubsPa2Y1ICCY_z_MgVHVs73fDTGC7g4QKldRbF6JW6nH7dy6QudLi6bejKowZ9JI/exec";
+  const scriptUrl = "https://script.google.com/macros/s/AKfycbwEBA4PwO8jiskRxHxTFg6W4nz7qEfvHWzh63_AyqoDrWkQEQvIkIzpuTeWaqGV2Ese/exec";
 
   if (!scriptUrl || !link) {
     return res.status(400).json({ error: "Invalid request. Missing scriptUrl or link." });
